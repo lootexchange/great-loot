@@ -359,48 +359,102 @@ contract GreatLoot is ERC721Enumerable, ReentrancyGuard {
         return rand % 21;
     }
 
+    function formatGreatness(uint256 greatness)
+        internal
+        pure
+        returns (string memory)
+    {
+        if (greatness >= 10) {
+            return toString(greatness);
+        } else {
+            return string(abi.encodePacked("0", toString(greatness)));
+        }
+    }
+
+    function formatGreatnessAndPart(uint256 greatness, string memory part)
+        internal
+        pure
+        returns (string memory)
+    {
+        return
+            string(abi.encodePacked(formatGreatness(greatness), "   ", part));
+    }
+
     function tokenURI(uint256 tokenId)
         public
         view
         override
         returns (string memory metadata)
     {
-        string[17] memory parts;
-        parts[
-            0
-        ] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: white; font-family: serif; font-size: 14px; }</style><rect width="100%" height="100%" fill="black" /><text x="10" y="20" class="base">';
+        string[19] memory parts;
+        uint256 totalGreatness;
+        {
+            parts[
+                0
+            ] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: white; white-space: pre; font-family: serif; font-size: 14px; }</style><rect width="100%" height="100%" fill="black" /><text x="10" y="20" class="base">';
 
-        parts[1] = getWeapon(tokenId);
+            uint256 weaponGreatness = getWeaponGreatness(tokenId);
+            parts[1] = formatGreatnessAndPart(
+                weaponGreatness,
+                getWeapon(tokenId)
+            );
 
-        parts[2] = '</text><text x="10" y="40" class="base">';
+            parts[2] = '</text><text x="10" y="40" class="base">';
 
-        parts[3] = getChest(tokenId);
+            uint256 chestGreatness = getChestGreatness(tokenId);
+            parts[3] = formatGreatnessAndPart(
+                chestGreatness,
+                getChest(tokenId)
+            );
 
-        parts[4] = '</text><text x="10" y="60" class="base">';
+            parts[4] = '</text><text x="10" y="60" class="base">';
 
-        parts[5] = getHead(tokenId);
+            uint256 headGreatness = getHeadGreatness(tokenId);
+            parts[5] = formatGreatnessAndPart(headGreatness, getHead(tokenId));
 
-        parts[6] = '</text><text x="10" y="80" class="base">';
+            parts[6] = '</text><text x="10" y="80" class="base">';
 
-        parts[7] = getWaist(tokenId);
+            uint256 waistGreatness = getWaistGreatness(tokenId);
+            parts[7] = formatGreatnessAndPart(
+                waistGreatness,
+                getWaist(tokenId)
+            );
 
-        parts[8] = '</text><text x="10" y="100" class="base">';
+            parts[8] = '</text><text x="10" y="100" class="base">';
 
-        parts[9] = getFoot(tokenId);
+            uint256 footGreatness = getFootGreatness(tokenId);
+            parts[9] = formatGreatnessAndPart(footGreatness, getFoot(tokenId));
 
-        parts[10] = '</text><text x="10" y="120" class="base">';
+            parts[10] = '</text><text x="10" y="120" class="base">';
 
-        parts[11] = getHand(tokenId);
+            uint256 handGreatness = getHandGreatness(tokenId);
+            parts[11] = formatGreatnessAndPart(handGreatness, getHand(tokenId));
 
-        parts[12] = '</text><text x="10" y="140" class="base">';
+            parts[12] = '</text><text x="10" y="140" class="base">';
 
-        parts[13] = getNeck(tokenId);
+            uint256 neckGreatness = getNeckGreatness(tokenId);
+            parts[13] = formatGreatnessAndPart(neckGreatness, getNeck(tokenId));
 
-        parts[14] = '</text><text x="10" y="160" class="base">';
+            parts[14] = '</text><text x="10" y="160" class="base">';
 
-        parts[15] = getRing(tokenId);
+            uint256 ringGreatness = getRingGreatness(tokenId);
+            parts[15] = formatGreatnessAndPart(ringGreatness, getRing(tokenId));
 
-        parts[16] = "</text></svg>";
+            parts[16] = '</text><text x="10" y="180" class="base">';
+
+            totalGreatness =
+                weaponGreatness +
+                chestGreatness +
+                headGreatness +
+                waistGreatness +
+                footGreatness +
+                handGreatness +
+                neckGreatness +
+                ringGreatness;
+            parts[17] = formatGreatness(totalGreatness);
+
+            parts[18] = "</text></svg>";
+        }
 
         string memory image = string(
             abi.encodePacked(
@@ -410,22 +464,29 @@ contract GreatLoot is ERC721Enumerable, ReentrancyGuard {
                 parts[3],
                 parts[4],
                 parts[5],
-                parts[6],
-                parts[7],
-                parts[8]
+                parts[6]
             )
         );
         image = string(
             abi.encodePacked(
                 image,
+                parts[7],
+                parts[8],
                 parts[9],
                 parts[10],
                 parts[11],
-                parts[12],
+                parts[12]
+            )
+        );
+        image = string(
+            abi.encodePacked(
+                image,
                 parts[13],
                 parts[14],
                 parts[15],
-                parts[16]
+                parts[16],
+                parts[17],
+                parts[18]
             )
         );
 
@@ -457,16 +518,6 @@ contract GreatLoot is ERC721Enumerable, ReentrancyGuard {
             )
         );
 
-        uint256 totalGreatness;
-        totalGreatness = totalGreatness + getWeaponGreatness(tokenId);
-        totalGreatness = totalGreatness + getChestGreatness(tokenId);
-        totalGreatness = totalGreatness + getHeadGreatness(tokenId);
-        totalGreatness = totalGreatness + getWaistGreatness(tokenId);
-        totalGreatness = totalGreatness + getFootGreatness(tokenId);
-        totalGreatness = totalGreatness + getHandGreatness(tokenId);
-        totalGreatness = totalGreatness + getNeckGreatness(tokenId);
-        totalGreatness = totalGreatness + getRingGreatness(tokenId);
-
         // Attributes
         metadata = string(abi.encodePacked(metadata, '  "attributes": [\n'));
         metadata = string(
@@ -490,7 +541,7 @@ contract GreatLoot is ERC721Enumerable, ReentrancyGuard {
     }
 
     function claim(uint256 tokenId) public nonReentrant {
-        require(tokenId > 10_000_000, "Token ID invalid");
+        require(tokenId > 100_000_000, "Token ID invalid");
         _safeMint(_msgSender(), tokenId);
     }
 
