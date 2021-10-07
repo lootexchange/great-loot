@@ -499,7 +499,7 @@ contract GreatLoot is ERC721Enumerable, ReentrancyGuard {
         metadata = string(
             abi.encodePacked(
                 metadata,
-                '  "description": "Loot is randomized adventurer gear generated and stored on chain. Stats, images, and other functionality are intentionally omitted for others to interpret. Feel free to use Loot in any way you want.",\n'
+                '  "description": "Mint any Loot bag with an ID greater than 100,000,000 (to avoid collisions with Loot / More Loot), in order to discover bags of untold greatness.",\n'
             )
         );
 
@@ -523,7 +523,7 @@ contract GreatLoot is ERC721Enumerable, ReentrancyGuard {
         metadata = string(
             abi.encodePacked(
                 metadata,
-                '    {\n      "display_type": "number",\n      "trait_type": "Greatness",\n      "value": ',
+                '    {\n      "trait_type": "Greatness",\n      "value": ',
                 toString(totalGreatness),
                 "\n",
                 "    }\n"

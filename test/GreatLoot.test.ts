@@ -52,13 +52,10 @@ describe("Hexo", () => {
           )
       );
 
-      // console.log(JSON.stringify(metadata, null, 2));
-
       expect(metadata.name).to.be.equal("Bag #100000999");
       expect(metadata.description).to.be.equal(
-        "Loot is randomized adventurer gear generated and stored on chain. Stats, images, and other functionality are intentionally omitted for others to interpret. Feel free to use Loot in any way you want."
+        "Mint any Loot bag with an ID greater than 100,000,000 (to avoid collisions with Loot / More Loot), in order to discover bags of untold greatness."
       );
-      expect(metadata.attributes[0].display_type).to.be.equal("number");
       expect(metadata.attributes[0].trait_type).to.be.equal("Greatness");
       expect(metadata.attributes[0].value).to.be.equal(
         getTotalGreatness(100_000_999)
