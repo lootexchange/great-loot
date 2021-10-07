@@ -440,7 +440,7 @@ contract GreatLoot is ERC721Enumerable, ReentrancyGuard {
             uint256 ringGreatness = getRingGreatness(tokenId);
             parts[15] = formatGreatnessAndPart(ringGreatness, getRing(tokenId));
 
-            parts[16] = '</text><text x="10" y="180" class="base">';
+            parts[16] = '</text><text x="10" y="335" class="base">';
 
             totalGreatness =
                 weaponGreatness +
@@ -523,9 +523,9 @@ contract GreatLoot is ERC721Enumerable, ReentrancyGuard {
         metadata = string(
             abi.encodePacked(
                 metadata,
-                '    {\n      "trait_type": "Greatness",\n      "value": ',
+                '    {\n      "trait_type": "Greatness",\n      "value": "',
                 toString(totalGreatness),
-                "\n",
+                '"\n',
                 "    }\n"
             )
         );

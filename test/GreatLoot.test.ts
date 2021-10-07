@@ -42,23 +42,23 @@ describe("GreatLoot", () => {
 
   describe("metadata", () => {
     it("valid metadata", async () => {
-      await greatLoot.connect(alice).claim(100_000_999);
+      await greatLoot.connect(alice).claim(100_000_990);
 
       const metadata = JSON.parse(
         await greatLoot
-          .tokenURI(100_000_999)
+          .tokenURI(100_000_990)
           .then((encoded: string) =>
             Buffer.from(encoded.split(",")[1], "base64").toString()
           )
       );
 
-      expect(metadata.name).to.be.equal("Bag #100000999");
+      expect(metadata.name).to.be.equal("Bag #100000990");
       expect(metadata.description).to.be.equal(
         'Hidden deep in the original Loot contract is a "greatness" score between 0 and 20 for every item. Great Loot exposes these scores and lets you mint any bag with an ID higher than 100,000,000, in order to discover bags of untold greatness. Will a bag with perfect 160 greatness be found?'
       );
       expect(metadata.attributes[0].trait_type).to.be.equal("Greatness");
       expect(metadata.attributes[0].value).to.be.equal(
-        getTotalGreatness(100_000_999)
+        getTotalGreatness(100_000_990).toString()
       );
     });
   });
