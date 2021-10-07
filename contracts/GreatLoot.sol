@@ -499,7 +499,7 @@ contract GreatLoot is ERC721Enumerable, ReentrancyGuard {
         metadata = string(
             abi.encodePacked(
                 metadata,
-                '  "description": "Mint any Loot bag with an ID greater than 100,000,000 (to avoid collisions with Loot / More Loot), in order to discover bags of untold greatness.",\n'
+                '  "description": "Hidden deep in the original Loot contract is a \\"greatness\\" score between 0 and 20 for every item. Great Loot exposes these scores and lets you mint any bag with an ID higher than 100,000,000, in order to discover bags of untold greatness. Will a bag with perfect 160 greatness be found?",\n'
             )
         );
 

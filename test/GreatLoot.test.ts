@@ -6,7 +6,7 @@ import { ethers } from "hardhat";
 import { deployContract } from "../src/deployment";
 import { getTotalGreatness } from "../src/loot";
 
-describe("Hexo", () => {
+describe("GreatLoot", () => {
   let deployer: SignerWithAddress;
   let alice: SignerWithAddress;
 
@@ -54,7 +54,7 @@ describe("Hexo", () => {
 
       expect(metadata.name).to.be.equal("Bag #100000999");
       expect(metadata.description).to.be.equal(
-        "Mint any Loot bag with an ID greater than 100,000,000 (to avoid collisions with Loot / More Loot), in order to discover bags of untold greatness."
+        'Hidden deep in the original Loot contract is a "greatness" score between 0 and 20 for every item. Great Loot exposes these scores and lets you mint any bag with an ID higher than 100,000,000, in order to discover bags of untold greatness. Will a bag with perfect 160 greatness be found?'
       );
       expect(metadata.attributes[0].trait_type).to.be.equal("Greatness");
       expect(metadata.attributes[0].value).to.be.equal(
