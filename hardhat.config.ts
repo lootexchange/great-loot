@@ -9,6 +9,10 @@ import "hardhat-gas-reporter";
 
 const config: HardhatUserConfig = {
   networks: {
+    mainnet: {
+      url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_KEY}`,
+      accounts: [`${process.env.DEPLOYER_PRIVATE_KEY || "0x00"}`],
+    },
     rinkeby: {
       url: `https://eth-rinkeby.alchemyapi.io/v2/${process.env.ALCHEMY_KEY}`,
       accounts: [`${process.env.DEPLOYER_PRIVATE_KEY || "0x00"}`],
