@@ -510,7 +510,7 @@ contract GreatLoot is ERC721Enumerable, ReentrancyGuard {
                 '  "image": "',
                 string(
                     abi.encodePacked(
-                        "data:application/json;base64,",
+                        "data:image/svg+xml;base64,",
                         Base64.encode(bytes(image))
                     )
                 ),
