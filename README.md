@@ -1,5 +1,5 @@
 # Great Loot
 
-Rinkeby: https://rinkeby.etherscan.io/address/0x06A7dAdd9964a68fB925768BaB5d5EBfE2fa979C
+Rinkeby: https://rinkeby.etherscan.io/address/0xb35D22a4553Ab9d2b85e2A606CBAe55F844DF50c
 
-Mainnet: https://etherscan.io/address/0x9A98786764e579Aa0fe00947f56d29d5cc601Eaa
+Mainnet: https://etherscan.io/address/0xd56789E9d7513fcaFBF45A0e6333f381766092D2
